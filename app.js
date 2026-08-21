@@ -8,9 +8,11 @@ const client = createClient(supabaseUrl, supabaseKey);
 console.log(client);
 
 
+// signup
+
 const form = document.querySelector("#studentRegisteration")
 
-form.addEventListener("submit",async(event)=>{
+form && form.addEventListener("submit",async(event)=>{
 try{
         event.preventDefault()
     const formInfo = new FormData(form)
@@ -92,4 +94,106 @@ inputs.forEach((input)=>{
     }
     })
    
+})
+
+
+// signup end
+
+
+
+// login start
+
+let  loginBtn = document.querySelector("#loginBtn")
+let  loginPass = document.querySelector("#loginPassword")
+let  loginEmail = document.querySelector("#loginEmail")
+
+
+// console.log(loginBtn)
+
+loginBtn && loginBtn.addEventListener("click",async(event)=>{
+    event.preventDefault()
+ 
+if(!loginEmail.value || !loginPass.value){
+    alert("no data")
+    return
+}
+
+
+try{
+    const { data, error } = await client.auth.signInWithPassword({
+  email: loginEmail.value,
+  password:loginPass.value,
+})
+
+const userData = data.user
+
+
+
+console.log(userData);
+
+
+if(userData){
+    alert("good")
+}
+window.location.href = "/home.html"
+console.log(error.message);
+
+
+
+
+switch(error.message){
+    case "Inavlid Login credintials":
+    alert("Inavlid Login credintials")
+}
+
+
+
+}catch(error){
+    console.log(error);
+}
+    
+
+
+
+
+
+
+})
+
+
+
+
+
+
+
+
+if(window.location.pathname.includes ("/home.html")){
+    
+  const getUser = async()=>{
+      const { data: { user } } = await client.auth.getUser()
+    // console.log(user.email);
+
+    let showUser = document.querySelector("#user")
+    showUser.innerHTML = user?.email || "xyz"
+
+
+  }
+    
+    getUser()
+}
+
+
+let logoutBtn = document.querySelector("#logout")
+console.log(logoutBtn);
+
+logoutBtn && logoutBtn.addEventListener("click",async()=>{
+    // event.preventDefault()
+    console.log("hi");
+    
+    event.preventDefault()
+const { error } = await client.auth.signOut()
+console.log(error);
+window.location.href = "login.html";
+
+
 })
