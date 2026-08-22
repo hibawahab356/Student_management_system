@@ -10,7 +10,7 @@ console.log(client);
 
 // signup
 
-const form = document.querySelector("#studentRegisteration")
+const form = document.querySelector("#studentRegistration")
 
 form && form.addEventListener("submit",async(event)=>{
 try{
@@ -102,55 +102,91 @@ inputs.forEach((input)=>{
 
 
 // login start
+let loginBtn = document.querySelector("#loginBtn");
+let loginPass = document.querySelector("#loginPassword");
+let loginEmail = document.querySelector("#loginEmail");
 
-let  loginBtn = document.querySelector("#loginBtn")
-let  loginPass = document.querySelector("#loginPassword")
-let  loginEmail = document.querySelector("#loginEmail")
+loginBtn && loginBtn.addEventListener("click", async (event) => {
+
+    event.preventDefault();
+
+    if (!loginEmail.value || !loginPass.value) {
+        alert("Please enter email and password");
+        return;
+    }
+
+    try {
+
+        const { data, error } = await client.auth.signInWithPassword({
+            email: loginEmail.value,
+            password: loginPass.value
+        });
+
+        if (error) {
+            console.log(error);
+            alert(error.message);
+            return;
+        }
+
+        console.log("Login user:", data.user);
+
+        alert("Login successful");
+
+        window.location.href = "./home.html";
+
+    } catch (error) {
+        console.log(error);
+    }
+
+});
+// let  loginBtn = document.querySelector("#loginBtn")
+// let  loginPass = document.querySelector("#loginPassword")
+// let  loginEmail = document.querySelector("#loginEmail")
 
 
 // console.log(loginBtn)
 
-loginBtn && loginBtn.addEventListener("click",async(event)=>{
-    event.preventDefault()
+// loginBtn && loginBtn.addEventListener("click",async(event)=>{
+//     event.preventDefault()
  
-if(!loginEmail.value || !loginPass.value){
-    alert("no data")
-    return
-}
+// if(!loginEmail.value || !loginPass.value){
+//     alert("no data")
+//     return
+// }
 
 
-try{
-    const { data, error } = await client.auth.signInWithPassword({
-  email: loginEmail.value,
-  password:loginPass.value,
-})
+// try{
+//     const { data, error } = await client.auth.signInWithPassword({
+//   email: loginEmail.value,
+//   password:loginPass.value,
+// })
 
-const userData = data.user
-
-
-
-console.log(userData);
-
-
-if(userData){
-    alert("good")
-}
-window.location.href = "/home.html"
-console.log(error.message);
+// const userData = data.user
 
 
 
-
-switch(error.message){
-    case "Inavlid Login credintials":
-    alert("Inavlid Login credintials")
-}
+// console.log(userData);
 
 
+// if(userData){
+//     alert("good")
+// }
+// window.location.href = "/home.html"
+// console.log(error.message);
 
-}catch(error){
-    console.log(error);
-}
+
+
+
+// switch(error.message){
+//     case "Inavlid Login credintials":
+//     alert("Inavlid Login credintials")
+// }
+
+
+
+// }catch(error){
+//     console.log(error);
+// }
     
 
 
@@ -158,8 +194,7 @@ switch(error.message){
 
 
 
-})
-
+// })
 
 
 
@@ -174,6 +209,8 @@ if(window.location.pathname.includes ("/home.html")){
     // console.log(user.email);
 
     let showUser = document.querySelector("#user")
+    console.log(showUser);
+    
     showUser.innerHTML = user?.email || "xyz"
 
 
@@ -183,7 +220,7 @@ if(window.location.pathname.includes ("/home.html")){
 }
 
 
-let logoutBtn = document.querySelector("#logout")
+let logoutBtn = document.querySelector("#logoutBtn")
 console.log(logoutBtn);
 
 logoutBtn && logoutBtn.addEventListener("click",async()=>{
@@ -193,7 +230,7 @@ logoutBtn && logoutBtn.addEventListener("click",async()=>{
     event.preventDefault()
 const { error } = await client.auth.signOut()
 console.log(error);
-window.location.href = "login.html";
+// window.location.href = "login.html";
 
 
 })
