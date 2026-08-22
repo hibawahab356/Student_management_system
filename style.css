@@ -686,7 +686,76 @@ h1 span {
     margin: 0;
     opacity: 0.9;
 }
+.home {
+    min-height: 100vh;
+    background: #f5f1ff;
 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    padding: 20px;
+}
+
+.welcome {
+    width: 100%;
+    max-width: 500px;
+
+    background: white;
+    text-align: center;
+
+    padding: 50px 30px;
+
+    border-radius: 25px;
+
+    box-shadow: 0 15px 40px rgba(77, 56, 140, 0.15);
+}
+
+.welcome p {
+    color: #7655d8;
+
+    font-size: 13px;
+    font-weight: bold;
+
+    letter-spacing: 2px;
+
+    margin-bottom: 15px;
+}
+
+#user {
+    color: #28233d;
+
+    /* font-size: 40px; */
+
+    margin-bottom: 15px;
+}
+
+.welcome span {
+    color: #77718a;
+
+    font-size: 15px;
+}
+
+#logoutBtn {
+    margin-top: 30px;
+
+    background: #7655d8;
+    color: white;
+
+    border: none;
+
+    padding: 13px 35px;
+
+    border-radius: 10px;
+
+    font-size: 15px;
+
+    cursor: pointer;
+}
+
+#logoutBtn:hover {
+    background: #6343c3;
+}
 @media (max-width: 991px) {
 
     .login-card {
