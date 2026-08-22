@@ -55,7 +55,6 @@ body {
 }
 
 
-/* Text */
 
 .text {
     width: 50%;
@@ -90,7 +89,6 @@ h1 span {
 }
 
 
-/* Buttons */
 
 .buttons {
     display: flex;
@@ -162,7 +160,7 @@ h1 span {
 }
 
 
-/* Bottom */
+
 
 .bottom {
     position: absolute;
