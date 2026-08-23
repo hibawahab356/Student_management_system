@@ -66,7 +66,7 @@ user_id : id,
 
 console.log(databaseError);
 
-window.location.href = "/login.html";
+window.location.href = "./login.html";
 if(signUpData){
     console.log(signUpData);
     
